@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Button, InputField } from '../components'
-import Icon from "react-native-vector-icons/Feather"
+import Icon from "@expo/vector-icons/Feather"
 
 const SignupScreen = () => {
   const [firstName, setFirstName] = useState('');
@@ -21,7 +21,7 @@ const SignupScreen = () => {
     if (firstName == '' || lastName == '' || email == '' || password == '') {
       setIsError(true)
     } else {
-      navigate('HomeScreen')
+      navigate('MainTab')
     }
   }
 

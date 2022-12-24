@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Button, InputField } from '../components'
-import Icon from "react-native-vector-icons/Feather"
+import Icon from "@expo/vector-icons/Feather"
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const LoginScreen = () => {
     if (email == '' || password == '') {
       setIsError(true)
     } else {
-      navigate('HomeScreen')
+      navigate('MainTab')
     }
   }
 

@@ -1,39 +1,31 @@
 import React from 'react';
-import { View, FlatList, Image, Text, StyleSheet, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'
+import { View, FlatList, Image, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from '@expo/vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
+import { imageSlider, newestProducts, productCategories } from '../constants/dataApp';
 
-const imageSlider = [
-  { image: require('../../assets/images/slide1.png') },
-  { image: require('../../assets/images/slide2.png') },
-  { image: require('../../assets/images/slide3.png') },
-]
+const NewestProduct = ({ item }) => {
+  const { navigate } = useNavigation()
+  return (
+    <TouchableOpacity onPress={() => navigate('ProductScreen', { product: item })}
+      style={styles.productWrapper}>
+      <Image source={item.productImage} style={styles.productImage} />
+      <Text style={styles.productName}>{item.productName}</Text>
+      <Text style={styles.productPrice}>{item.price}</Text>
+    </TouchableOpacity>
+  )
+};
 
-const newestProducts = [
-  { productImage: require('../../assets/images/jeans.png'), price: '$10.99', productName: 'Jeans' },
-  { productImage: require('../../assets/images/sweaters.png'), price: '$12.99', productName: 'Sweaters' },
-  { productImage: require('../../assets/images/boots.png'), price: '$14.99', productName: 'Boots' },
-  { productImage: require('../../assets/images/runningshoes.png'), price: '$16.99', productName: 'Running Shoes' },
-];
-
-const productCategories = [
-  { categoryImage: require('../../assets/images/clothing.png'), categoryName: 'Clothing' },
-  { categoryImage: require('../../assets/images/shoes.png'), categoryName: 'Shoes' },
-];
-
-const NewestProduct = ({ item }) => (
-  <View style={styles.card}>
-    <Image source={item.productImage} style={styles.productImage} />
-    <Text style={styles.productName}>{item.productName}</Text>
-    <Text style={styles.productPrice}>{item.price}</Text>
-  </View>
-);
-
-const ProductCategories = ({ item }) => (
-  <View style={styles.card}>
-    <Image source={item.categoryImage} style={styles.categoryImage} />
-    <Text style={styles.categoryName}>{item.categoryName}</Text>
-  </View>
-);
+const ProductCategories = ({ item }) => {
+  const { navigate } = useNavigation()
+  return (
+    <TouchableOpacity onPress={() => navigate('CategoryScreen', { category: item })}
+      style={styles.categoryWrapper}>
+      <Image source={item.categoryImage} style={styles.categoryImage} />
+      <Text style={styles.categoryName}>{item.categoryName}</Text>
+    </TouchableOpacity>
+  )
+};
 
 const HomeScreen = () => {
 
@@ -93,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    padding: 20,
+    paddingHorizontal: 20,
     paddingTop: 50,
   },
   header: {
@@ -120,30 +112,55 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 20,
   },
-  card: {
+  productWrapper: {
+    width: 200,
     marginRight: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 6,
   },
   productImage: {
-    width: 175,
-    height: 200,
-    borderRadius: 10,
+    width: 198,
+    height: 220,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    margin: -10,
+    marginBottom: 0,
+    resizeMode: 'contain',
   },
   productName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 14,
     marginTop: 6,
+    marginBottom: 2,
   },
   productPrice: {
     fontSize: 16,
+    fontWeight: 'bold',
+    color: '#555'
+  },
+  categoryWrapper: {
+    width: 200,
+    marginRight: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
   },
   categoryImage: {
-    width: 175,
-    height: 200,
-    borderRadius: 6,
+    width: 200,
+    height: 220,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    margin: -11,
+    marginBottom: 0,
+    resizeMode: 'contain',
   },
   categoryName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 14,
     marginTop: 10,
+    marginBottom: 6,
   },
 });
